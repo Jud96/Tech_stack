@@ -6,6 +6,11 @@
 python -m pip install "flask-marshmallow[sqlalchemy]==0.14.0"
 ```
 
+```bash
+#Install the pinned dependencies from `requirements.txt`:
+python -m pip install -r requirements.txt
+```
+
 **Build Your Database**
 
 ```bash
