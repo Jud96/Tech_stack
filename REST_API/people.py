@@ -1,7 +1,7 @@
 # people.py
 
 from datetime import datetime
-from flask import abort
+from flask import abort , make_response
 
 def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
@@ -61,6 +61,18 @@ def update(lname, person):
             404,
             f"Person with last name {lname} not found"
         )
-      
+ 
+def delete(lname):
+    if lname in PEOPLE:
+        del PEOPLE[lname]
+        return make_response(
+            f"{lname} successfully deleted", 200
+        )
+    else:
+        abort(
+            404,
+            f"Person with last name {lname} not found"
+        )
+             
 def read_all():
     return list(PEOPLE.values())

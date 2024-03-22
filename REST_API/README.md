@@ -207,7 +207,7 @@ paths:
 and add read_one function to people.py
 ```python
 # people.py
-**update a person**
+**read a person**
 def read_one(lname):
     if lname in PEOPLE:
         return PEOPLE[lname]
@@ -254,6 +254,51 @@ def update(lname, person):
         PEOPLE[lname]["fname"] = person.get("fname", PEOPLE[lname]["fname"])
         PEOPLE[lname]["timestamp"] = get_timestamp()
         return PEOPLE[lname]
+    else:
+        abort(
+            404,
+            f"Person with last name {lname} not found"
+        )
+```
+**delete a person**
+```yaml
+# swagger.yml
+
+# ...
+
+paths:
+  /people:
+    # ...
+  /people/{lname}:
+    get:
+        # ...
+    put:
+        # ...
+    delete:
+      tags:
+        - People
+      operationId: "people.delete"
+      summary: "Delete a person"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "204":
+          description: "Successfully deleted person"
+```
+and add delete function to people.py
+```python
+# people.py
+
+from flask import abort, make_response
+
+# ...
+
+def delete(lname):
+    if lname in PEOPLE:
+        del PEOPLE[lname]
+        return make_response(
+            f"{lname} successfully deleted", 200
+        )
     else:
         abort(
             404,
