@@ -167,3 +167,38 @@ paths:
         "201":
           description: "Successfully created person"
 ```
+
+**Handle a Person**
+
+```yaml
+# swagger.yml
+
+# ...
+
+components:
+  schemas:
+    # ...
+  parameters:
+    lname:
+      name: "lname"
+      description: "Last name of the person to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
+
+paths:
+  /people:
+    # ...
+  /people/{lname}:
+    get:
+      operationId: "people.read_one"
+      tags:
+        - People
+      summary: "Read one person"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully read person"
+```

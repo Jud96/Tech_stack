@@ -43,5 +43,13 @@ def create(person):
             f"Person with last name {lname} already exists",
         )
 
+def read_one(lname):
+    if lname in PEOPLE:
+        return PEOPLE[lname]
+    else:
+        abort(
+            404, f"Person with last name {lname} not found"
+        )
+        
 def read_all():
     return list(PEOPLE.values())
