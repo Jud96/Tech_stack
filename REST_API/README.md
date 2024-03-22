@@ -126,3 +126,44 @@ PEOPLE = {
 def read_all():
     return list(PEOPLE.values())
 ```
+
+**Work With Components**
+are building blocks in your OpenAPI specification that you can reference from 
+other parts of your specification.
+```yaml
+components:
+  schemas:
+    Person:
+      type: "object"
+      required:
+        - lname
+      properties:
+        fname:
+          type: "string"
+        lname:
+          type: "string"
+```
+
+**Create a New Person**
+```yaml
+paths:
+  /people:
+    get:
+        # ...
+    post:
+      operationId: "people.create"
+      tags:
+        - People
+      summary: "Create a person"
+      requestBody:
+          description: "Person to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "person"
+                $ref: "#/components/schemas/Person"
+      responses:
+        "201":
+          description: "Successfully created person"
+```
