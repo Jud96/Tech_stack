@@ -49,3 +49,80 @@ if __name__ == "__main__":
 </body>
 </html>
 ```
+
+**Create the API Configuration File**
+
+```bash
+# swagger.yml
+
+openapi: 3.0.0
+info:
+  title: "RP Flask REST API"
+  description: "An API about people and notes"
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+
+paths:
+  /people:
+    get:
+      operationId: "people.read_all"
+      tags:
+        - "People"
+      summary: "Read the list of people"
+      responses:
+        "200":
+          description: "Successfully read people list"
+```
+
+**edit app.py**
+
+```python
+# app.py
+
+from flask import render_template # Remove: import Flask
+import connexion
+
+app = connexion.App(__name__, specification_dir="./")
+app.add_api("swagger.yml")
+
+@app.route("/")
+def home():
+    return render_template("home.html")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000, debug=True)
+```
+
+** add people.py**
+
+```python
+# people.py
+
+from datetime import datetime
+
+def get_timestamp():
+    return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
+
+PEOPLE = {
+    "Fairy": {
+        "fname": "Tooth",
+        "lname": "Fairy",
+        "timestamp": get_timestamp(),
+    },
+    "Ruprecht": {
+        "fname": "Knecht",
+        "lname": "Ruprecht",
+        "timestamp": get_timestamp(),
+    },
+    "Bunny": {
+        "fname": "Easter",
+        "lname": "Bunny",
+        "timestamp": get_timestamp(),
+    }
+}
+
+def read_all():
+    return list(PEOPLE.values())
+```
