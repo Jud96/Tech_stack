@@ -168,7 +168,9 @@ paths:
           description: "Successfully created person"
 ```
 
-**Handle a Person**
+### Handle a Person
+
+**read a person**
 
 ```yaml
 # swagger.yml
@@ -201,4 +203,60 @@ paths:
       responses:
         "200":
           description: "Successfully read person"
+```
+and add read_one function to people.py
+```python
+# people.py
+**update a person**
+def read_one(lname):
+    if lname in PEOPLE:
+        return PEOPLE[lname]
+    else:
+        abort(
+            404, f"Person with last name {lname} not found"
+        )
+```
+**update a person**
+```yaml
+ swagger.yml
+
+# ...
+
+paths:
+  /people:
+    # ...
+  /people/{lname}:
+    get:
+        # ...
+    put:
+      tags:
+        - People
+      operationId: "people.update"
+      summary: "Update a person"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully updated person"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "person"
+              $ref: "#/components/schemas/Person"
+```
+
+and add update function to people.py
+```python
+# people.py
+def update(lname, person):
+    if lname in PEOPLE:
+        PEOPLE[lname]["fname"] = person.get("fname", PEOPLE[lname]["fname"])
+        PEOPLE[lname]["timestamp"] = get_timestamp()
+        return PEOPLE[lname]
+    else:
+        abort(
+            404,
+            f"Person with last name {lname} not found"
+        )
 ```

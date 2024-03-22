@@ -50,6 +50,17 @@ def read_one(lname):
         abort(
             404, f"Person with last name {lname} not found"
         )
-        
+
+def update(lname, person):
+    if lname in PEOPLE:
+        PEOPLE[lname]["fname"] = person.get("fname", PEOPLE[lname]["fname"])
+        PEOPLE[lname]["timestamp"] = get_timestamp()
+        return PEOPLE[lname]
+    else:
+        abort(
+            404,
+            f"Person with last name {lname} not found"
+        )
+      
 def read_all():
     return list(PEOPLE.values())
