@@ -36,3 +36,33 @@ class Person(db.Model):
 ```bash 
 $ python DB/build_database.py
 ```
+**Show Notes in the Front End**
+
+```html
+
+
+<!-- templates/home.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RP Flask REST API</title>
+</head>
+<body>
+    <h1>
+        Hello, People!
+    </h1>
+    {% for person in people %}
+    <h2>{{ person.fname }} {{ person.lname }}</h2>
+    <ul>
+        {% for note in person.notes %}
+        <li>
+            {{ note.content }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</body>
+</html>
+```
