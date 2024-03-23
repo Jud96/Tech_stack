@@ -123,3 +123,67 @@ class PersonSchema(ma.SQLAlchemyAutoSchema):
 note_schema = NoteSchema()
 # ...
 ```
+
+## Handle Notes With Your REST API
+
+**Read a Single Note**
+ add the following to swagger.yml:
+ 1- add note_id parameter
+ 2- add /notes/{note_id} path
+```yaml
+# swagger.yml
+
+# ...
+
+components:
+  schemas:
+    # ...
+
+  parameters:
+    lname:
+      # ...
+    note_id:
+      name: "note_id"
+      description: "ID of the note"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+# ...
+
+paths:
+  /people:
+    # ...
+  /people/{lname}:
+    # ...
+  /notes/{note_id}:
+    get:
+      operationId: "notes.read_one"
+      tags:
+        - Notes
+      summary: "Read one note"
+      parameters:
+        - $ref: "#/components/parameters/note_id"
+      responses:
+        "200":
+          description: "Successfully read one note"
+```
+and add the following to notes.py:
+```python
+# notes.py
+
+from flask import abort, make_response
+
+from config import db
+from models import Note, note_schema
+
+def read_one(note_id):
+    note = Note.query.get(note_id)
+
+    if note is not None:
+        return note_schema.dump(note)
+    else:
+        abort(
+            404, f"Note with ID {note_id} not found"
+        )
+```
