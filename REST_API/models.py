@@ -33,6 +33,7 @@ class PersonSchema(ma.SQLAlchemyAutoSchema):
         model = Person
         load_instance = True
         sqla_session = db.session
+        include_relationships = True
 
 person_schema = PersonSchema()
 people_schema = PersonSchema(many=True)
