@@ -31,3 +31,8 @@ class Person(db.Model):
         order_by="desc(Note.timestamp)"
     )
 ```
+
+**add build_databasee**
+```bash 
+$ python DB/build_database.py
+```
