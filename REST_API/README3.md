@@ -66,3 +66,60 @@ $ python DB/build_database.py
 </body>
 </html>
 ```
+
+**Respond With Notes**
+
+Next, check the /api/people endpoint of your API at http://localhost:8000/api/people:
+
+```python
+# people.py
+
+# ...
+
+def read_all():
+    people = Person.query.all()
+    person_schema = PersonSchema(many=True)
+    return person_schema.dump(people)
+
+# ...
+```
+
+```python
+# models.py
+
+# ...
+
+class PersonSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Person
+        load_instance = True
+        sqla_session = db.session
+        include_relationships = True
+```
+
+**Create a Notes Schema**
+
+```python
+# models.py
+
+# ...
+
+class Note(db.Model):
+    # ...
+
+class NoteSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Note
+        load_instance = True
+        sqla_session = db.session
+        include_fk = True
+
+class Person(db.Model):
+    # ...
+
+class PersonSchema(ma.SQLAlchemyAutoSchema):
+    # ...
+
+note_schema = NoteSchema()
+# ...
+```

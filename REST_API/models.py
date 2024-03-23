@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from config import db, ma
+from marshmallow_sqlalchemy import fields
 
 class Note(db.Model):
 
@@ -12,6 +13,14 @@ class Note(db.Model):
     timestamp = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
+
+class NoteSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Note
+        load_instance = True
+        sqla_session = db.session
+        include_fk = True
+
 class Person(db.Model):
     __tablename__ = "person"
     id = db.Column(db.Integer, primary_key=True)
@@ -20,13 +29,7 @@ class Person(db.Model):
     timestamp = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
-    notes = db.relationship(
-        Note,
-        backref="person",
-        cascade="all, delete, delete-orphan",
-        single_parent=True,
-        order_by="desc(Note.timestamp)"
-    )
+    notes =  fields.Nested(NoteSchema, many=True)
 
 class PersonSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
@@ -35,5 +38,6 @@ class PersonSchema(ma.SQLAlchemyAutoSchema):
         sqla_session = db.session
         include_relationships = True
 
+note_schema = NoteSchema()
 person_schema = PersonSchema()
 people_schema = PersonSchema(many=True)
