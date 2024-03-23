@@ -1,8 +1,11 @@
-# models.py
+## deal with Relational database
 
-from datetime import datetime
-from config import db, ma
 
+we will add for each person a list of notes
+
+**modify models.py**
+
+```python
 class Note(db.Model):
 
     __tablename__ = "note"
@@ -27,12 +30,4 @@ class Person(db.Model):
         single_parent=True,
         order_by="desc(Note.timestamp)"
     )
-
-class PersonSchema(ma.SQLAlchemyAutoSchema):
-    class Meta:
-        model = Person
-        load_instance = True
-        sqla_session = db.session
-
-person_schema = PersonSchema()
-people_schema = PersonSchema(many=True)
+```
