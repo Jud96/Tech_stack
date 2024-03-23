@@ -244,3 +244,56 @@ def delete(note_id):
         "204":
           description: "Successfully deleted note"
 ```
+
+**Create a Note for a Person**
+
+```python
+# notes.py
+
+from flask import make_response, abort
+
+from config import db
+from models import Note, Person, note_schema
+
+# ...
+
+def create(note):
+    person_id = note.get("person_id")
+    person = Person.query.get(person_id)
+
+    if person:
+        new_note = note_schema.load(note, session=db.session)
+        person.notes.append(new_note)
+        db.session.commit()
+        return note_schema.dump(new_note), 201
+    else:
+        abort(
+            404,
+            f"Person not found for ID: {person_id}"
+        )
+```
+
+```yaml
+/notes:
+    post:
+      operationId: "notes.create"
+      tags:
+        - Notes
+      summary: "Create a note associated with a person"
+      requestBody:
+          description: "Note to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "note"
+                type: "object"
+                properties:
+                  person_id:
+                    type: "integer"
+                  content:
+                    type: "string"
+      responses:
+        "201":
+          description: "Successfully created a note"
+```

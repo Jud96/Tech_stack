@@ -53,7 +53,7 @@ for person in people:
 ```
 
 **Configure Your Database**
-
+marshmallow is a library for object serialization and deserialization. It can be used to convert complex data types, such as objects, to and from native Python data types. marshmallow is commonly used with SQLAlchemy to serialize and deserialize database objects.
 ```python
 # config.py
 
@@ -117,3 +117,4 @@ class PersonSchema(ma.SQLAlchemyAutoSchema):
 person_schema = PersonSchema()
 people_schema = PersonSchema(many=True)
 ```
+update people.py to deal with the database
