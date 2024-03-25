@@ -1,0 +1,6 @@
+
+# Dockerfile
+FROM ubuntu
+ENTRYPOINT ["sleep"] #  this will allow you to pass the time as an argument
+CMD ["5"] # default time
+
