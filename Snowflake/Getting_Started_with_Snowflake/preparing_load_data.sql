@@ -30,7 +30,7 @@ gender integer);
 -- has already been staged in a public, external S3 bucket. 
 
 -- stage is a Snowflake object that points to a location where data files are stored.
-create or replace stage citibike_stage url='s3://snowflake-workshop-lab/citibike/';
+create or replace stage citibike_trips url='s3://snowflake-workshop-lab/citibike-trips-csv/';
 
 -- verify stage is created
 list @citibike_stage;
