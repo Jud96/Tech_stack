@@ -10,7 +10,14 @@ at first step of this tutorial
     - run  queries
     - caching query results
     - cloning 
-   
+- working with semi-structured data
+    - create a table with a variant column
+    - query semi-structured data
+    - views and joins 
+- working with Roles Account Admin
+    - create a role
+    - grant privileges to a role
+    - grant a role to a user
 
 
 
