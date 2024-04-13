@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+    - name: jaffle_shop
+      description: This is a replica of the Postgres database used by our app
+      database: raw
+      schema: jaffle_shop
+      tables:
+          - name: customers
+            description: One record per customer.
+          - name: orders
+            description: One record per order. Includes cancelled and deleted orders.
+            loaded_at_field: _etl_loaded_at
+            freshness:
+              warn_after: {count: 12, period: hour}
+              error_after: {count: 24, period: hour}
+              # dbt will warn if the max(_etl_loaded_at)  > 12 hours old, and error 
+              # if max(_etl_loaded_at) > 24 hours old in the orders table when checking source freshness.
+    - name : stripe
+      description: This is a replica of the Stripe database
+      database: raw
+      schema: stripe
+      tables:
+          - name: payment
+            description: One record per payment.
+            
