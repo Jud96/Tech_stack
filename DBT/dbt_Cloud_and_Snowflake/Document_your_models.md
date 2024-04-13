@@ -1,32 +1,40 @@
+## Document your models
+
+Update your models/schema.yml file to include some descriptions, such as those below.
+
+```yaml
 version: 2
 
 models:
   - name: customers
-    description: Staged customer data from our jaffle shop app.
+    description: One record per customer
     columns:
       - name: customer_id
-        description: The primary key for customers.
+        description: Primary key
         tests:
           - unique
           - not_null
+      - name: first_order_date
+        description: NULL when a customer has not yet placed an order.
 
   - name: stg_customers
+    description: This model cleans up customer data
     columns:
       - name: customer_id
+        description: Primary key
         tests:
           - unique
           - not_null
 
   - name: stg_orders
-    description: Staged order data from our jaffle shop app.
+    description: This model cleans up order data
     columns:
       - name: order_id
-        description: Primary key for orders.
+        description: Primary key
         tests:
           - unique
           - not_null
       - name: status
-        description: '{{ doc("order_status") }}'
         tests:
           - accepted_values:
               values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
@@ -36,3 +44,8 @@ models:
           - relationships:
               to: ref('stg_customers')
               field: customer_id
+```
+
+```bash
+dbt docs generate
+```
