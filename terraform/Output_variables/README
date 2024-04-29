@@ -1,0 +1,10 @@
+### Output variables
+Output variables are a way to organize data to be easily queried and shown back to the Terraform user. They are defined in the output block of the configuration file.
+
+first we have defind resource uuid and then we have used output block to show the resource id to the user.
+
+```bash
+terraform init
+terraform apply
+terraform output
+```
