@@ -16,3 +16,10 @@ resource "local_file" "time" {
 }
 ```
 in the code above, the attribute id is referred to using the reference expression ${time_static.time_update.id}.
+
+
+```bash
+terraform init
+terraform apply
+terraform show
+```
