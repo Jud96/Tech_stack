@@ -1,0 +1,18 @@
+# Resource attributes
+Attributes are value storing fields in resource, data source, or provider schemas. Every attribute has an associated value type, which describes the kind of data the attribute can hold. Attributes also can describe value plan modifiers (resources only) and value validators in addition to those defined by the value type.
+
+Generally, attribute references are information related to the infrastructure we are configuring. We can obtain them only after our code is applied.
+
+How do we refer to the attribute called id using a reference expression?
+${time_static.time_update.id}
+
+```terraform
+resource "local_file" "time" {
+  filename = "/root/time.txt"
+  content = "Time stamp of this file is ${time_static.time_update.id}"
+
+ }
+ resource "time_static" "time_update" {
+}
+```
+in the code above, the attribute id is referred to using the reference expression ${time_static.time_update.id}.
