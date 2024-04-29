@@ -63,3 +63,15 @@ resource "aws_s3_bucket" "my_bucket" {
 terraform init : initialize a working directory containing Terraform configuration files
 terraform plan : generate and show an execution plan
 terraform apply : apply the changes required to reach the desired state of the configuration
+
+##  update und destroy
+terraform apply : apply the changes required to reach the desired state of the configuration
+```terraform
+resource "local_file" "pet" {
+  content  = "dog"
+  filename = "/tmp/pet.txt"
+  file_permission = "0700"
+}
+```
+it will destroy the existing file and create a new file with the new content
+terraform destroy : destroy the Terraform-managed infrastructure
