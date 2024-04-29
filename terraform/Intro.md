@@ -75,3 +75,11 @@ resource "local_file" "pet" {
 ```
 it will destroy the existing file and create a new file with the new content
 terraform destroy : destroy the Terraform-managed infrastructure
+
+go over 
+- providers
+- Input variables
+- using variables
+- resource attributes
+- resource dependencies
+- output variables
