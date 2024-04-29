@@ -83,3 +83,9 @@ go over
 - resource attributes
 - resource dependencies
 - output variables
+- terraform state
+- terraform commands
+- terraform lifecycle rules
+- data sources
+- count and for_each
+- version constraints
