@@ -1,0 +1,39 @@
+## Resource dependencies
+
+Resource dependencies are the relationships between resources in a Terraform configuration. Terraform uses these dependencies to determine the order in which resources are created, updated, and destroyed.
+
+we use depends_on to create dependencies between resources. This ensures that the resources are created in the correct order.
+
+explicit dependencies are created using the depends_on argument.
+```terraform
+resource "local_file" "whale" {
+  filename   = "/root/whale"
+  content    = "whale"
+  depends_on = [local_file.krill]
+}
+resource "local_file" "krill" {
+  filename = "/root/krill"
+  content  = "krill"
+}
+```
+implicit dependencies are created when one resource references another resource's attribute.
+
+
+```terraform
+-- key.tf
+
+resource "tls_private_key" "pvtkey" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "local_file" "key_details" {
+  content  = tls_private_key.pvtkey.private_key_pem
+  filename = "/root/key.txt"
+}
+```
+```bash
+terraform init
+terraform apply
+terraform destroy
+```
