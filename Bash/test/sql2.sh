@@ -1,0 +1,1 @@
+sudo -i -u postgres psql  -c "select * from pg_user;"
