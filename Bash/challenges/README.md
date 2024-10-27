@@ -1,0 +1,11 @@
+1. tenth-line https://leetcode.com/problems/tenth-line/description/
+2. transpose-file https://leetcode.com/problems/transpose-file/description/
+3. valid-phone-numbers https://leetcode.com/problems/valid-phone-numbers/description/
+4. word-frequency https://leetcode.com/problems/word-frequency/description/
+5. odd_numbers https://www.hackerrank.com/challenges/bash-tutorials---looping-and-skipping/problem?isFullScreen=true
+6. personalized-echo https://www.hackerrank.com/challenges/bash-tutorials---a-personalized-echo/problem?isFullScreen=true
+7. world-of-numbers https://www.hackerrank.com/challenges/bash-tutorials---the-world-of-numbers/problem?isFullScreen=true
+8. getting-started-with-conditionals https://www.hackerrank.com/challenges/bash-tutorials---getting-started-with-conditionals/problem?isFullScreen=true
+9. more-on-conditionals https://www.hackerrank.com/challenges/bash-tutorials---more-on-conditionals/problem?isFullScreen=true
+10. arithmetic-operations https://www.hackerrank.com/challenges/bash-tutorials---arithmetic-operations/problem?isFullScreen=true
+11. compute-the-average https://www.hackerrank.com/challenges/bash-tutorials---compute-the-average/problem?isFullScreen=true
