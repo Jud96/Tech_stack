@@ -18,4 +18,4 @@
 ### mutable and immutable infrastructure
 mutable infrastructure is the traditional way of managing infrastructure. In this approach, the infrastructure is updated in place. This means that changes are made directly to the existing infrastructure.
 
-immutable infrastructure is a modern approach to managing infrastructure. In this approach, changes are made by replacing the existing infrastructure with a new one. This ensures that the infrastructure is always in a known good state.
+**immutable infrastructure** is a modern approach to managing infrastructure. In this approach, changes are made by replacing the existing infrastructure with a new one. This ensures that the infrastructure is always in a known good state.
