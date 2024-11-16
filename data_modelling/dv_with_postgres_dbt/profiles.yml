@@ -1,0 +1,18 @@
+# connect to the database postgres
+# select the schema public
+
+
+dv_with_postgres_dbt:
+  target: dev
+  outputs:
+    dev:
+      dbname: tpch
+      host: localhost
+      pass: postgres
+      port: 5432
+      schema: public
+      threads: 12
+      type: postgres
+      user: postgres
+
+
